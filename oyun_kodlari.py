@@ -40,7 +40,7 @@ kazanma_ses.set_volume(1)
 
 #Font ayarı
 FONT1 = pygame.font.SysFont("calibri", 40)
-FONT2 = pygame.font.SysFont("Terminal", 40)
+FONT2 = pygame.font.SysFont("terminal", 40)
 FONT3 = pygame.font.SysFont("calibri", 40)
 
 #renkler
@@ -87,7 +87,7 @@ while durum:
     pencere.blit(hasan, hasan_koordinat)
     pencere.blit(yem, yem_koordinat)
 
-    skor_yazi = FONT1.render("Score: " + str(skor) + " ", True, MAVI, BEYAZ)
+    skor_yazi = FONT1.render("Score: " + str(skor) + " ", True, SARI)
     skor_yazi_koordinat = skor_yazi.get_rect()
     skor_yazi_koordinat.topleft = (10,10)
 
@@ -95,7 +95,7 @@ while durum:
     oyun_ismi_yazisi_koordinat = oyun_ismi_yazisi.get_rect()
     oyun_ismi_yazisi_koordinat.topleft = (210,10)
 
-    level_yazisi = FONT3.render("Level: " + str(level) + " ", True, MOR, BEYAZ)
+    level_yazisi = FONT3.render("Level: " + str(level) + " ", True, MOR)
     level_yazisi_koordinat = level_yazisi.get_rect()
     level_yazisi_koordinat.topleft = (500,10)
 
@@ -103,6 +103,49 @@ while durum:
     pencere.blit(oyun_ismi_yazisi,oyun_ismi_yazisi_koordinat)
     pencere.blit(skor_yazi, skor_yazi_koordinat)
     pencere.blit(level_yazisi,level_yazisi_koordinat)
+
+    if skor == 10 and level == 0:
+        hasan = pygame.image.load("veri/monster(1).png")
+        if A == 0:
+            level_yukselme_sesi.play()
+            hasan_koordinat = hasan.get_rect()
+            hasan_koordinat.topleft = (192, 90)
+            A += 1
+            level += 1
+
+    if skor == 20 and level == 1:
+        hasan = pygame.image.load("veri/monster(2).png")
+        if A == 1:
+            level_yukselme_sesi.play()
+            hasan_koordinat = hasan.get_rect()
+            hasan_koordinat.topleft = (192, 90)
+            A += 1
+            level += 1
+
+    if skor == 50 and level == 2:
+        hasan = pygame.image.load("veri/monster(3).png")
+        if A == 2:
+            level_yukselme_sesi.play()
+            hasan_koordinat = hasan.get_rect()
+            hasan_koordinat.topleft = (192, 90)
+            A += 1
+            level += 1
+
+    if skor == 100 and level == 3:
+        hasan = pygame.image.load("veri/monster(4).png")
+        if A == 3:
+            son_level_yukselme_sesi.play()
+            hasan_koordinat = hasan.get_rect()
+            hasan_koordinat.topleft = (192,90)
+            A += 1
+            level += 1
+
+    if skor == 150 and level == 4:
+        kazanma_ses.play()
+        if A == 4:
+            yem_koordinat.topleft = (0,0)
+            pencere.blit(yem, yem_koordinat)
+            pencere.blit(oyun_bitti_goruntusu,(0,0))
 
     tus = pygame.key.get_pressed()
     if tus[pygame.K_LEFT] and hasan_koordinat.left > 0:
@@ -128,145 +171,6 @@ while durum:
         yem_koordinat.x = random.randint(0,GENISLIK-32)
         yem_koordinat.y = random.randint(55,YUKSEKLIK-32)
         skor += 1
-
-    if skor == 10 and level == 0:
-        hasan = pygame.image.load("veri/monster(1).png")
-        if A == 0:
-            level_yukselme_sesi.play()
-            hasan_koordinat = hasan.get_rect()
-            hasan_koordinat.topleft = (192, 90)
-            A += 1
-            level += 1
-
-        if tus[pygame.K_LEFT] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_RIGHT] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_UP] and hasan_koordinat.top > 55 :
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_DOWN] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        elif tus[pygame.K_a] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_d] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_w] and hasan_koordinat.top > 55:
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_s] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        if hasan_koordinat.colliderect(yem_koordinat):
-            yem_ses.play()
-            yem_koordinat.x = random.randint(0,GENISLIK-32)
-            yem_koordinat.y = random.randint(55,YUKSEKLIK-32)
-            skor += 1
-
-    if skor == 20 and level == 1:
-        hasan = pygame.image.load("veri/monster(2).png")
-        if A == 1:
-            level_yukselme_sesi.play()
-            hasan_koordinat = hasan.get_rect()
-            hasan_koordinat.topleft = (192, 90)
-            A += 1
-            level += 1
-
-        if tus[pygame.K_LEFT] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_RIGHT] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_UP] and hasan_koordinat.top > 55 :
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_DOWN] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        elif tus[pygame.K_a] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_d] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_w] and hasan_koordinat.top > 55:
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_s] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        if hasan_koordinat.colliderect(yem_koordinat):
-            yem_ses.play()
-            yem_koordinat.x = random.randint(0,GENISLIK-32)
-            yem_koordinat.y = random.randint(55,YUKSEKLIK-32)
-            skor += 1
-
-    if skor == 50 and level == 2:
-        hasan = pygame.image.load("veri/monster(3).png")
-        if A == 2:
-            level_yukselme_sesi.play()
-            hasan_koordinat = hasan.get_rect()
-            hasan_koordinat.topleft = (192, 90)
-            A += 1
-            level += 1
-
-        if tus[pygame.K_LEFT] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_RIGHT] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_UP] and hasan_koordinat.top > 55 :
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_DOWN] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        elif tus[pygame.K_a] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_d] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_w] and hasan_koordinat.top > 55:
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_s] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        if hasan_koordinat.colliderect(yem_koordinat):
-            yem_ses.play()
-            yem_koordinat.x = random.randint(0,GENISLIK-32)
-            yem_koordinat.y = random.randint(55,YUKSEKLIK-32)
-            skor += 1
-
-    if skor == 100 and level == 3:
-        hasan = pygame.image.load("veri/monster(4).png")
-        if A == 3:
-            son_level_yukselme_sesi.play()
-            hasan_koordinat = hasan.get_rect()
-            hasan_koordinat.topleft = (192,90)
-            A += 1
-            level += 1
-
-        if tus[pygame.K_LEFT] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_RIGHT] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_UP] and hasan_koordinat.top > 55 :
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_DOWN] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        elif tus[pygame.K_a] and hasan_koordinat.left > 0:
-            hasan_koordinat.x -= HIZ
-        elif tus[pygame.K_d] and hasan_koordinat.right < GENISLIK:
-            hasan_koordinat.x += HIZ
-        elif tus[pygame.K_w] and hasan_koordinat.top > 55:
-            hasan_koordinat.y -= HIZ
-        elif tus[pygame.K_s] and hasan_koordinat.bottom < YUKSEKLIK:
-            hasan_koordinat.y += HIZ
-
-        if hasan_koordinat.colliderect(yem_koordinat):
-            yem_ses.play()
-            yem_koordinat.x = random.randint(0,GENISLIK-32)
-            yem_koordinat.y = random.randint(55,YUKSEKLIK-32)
-            skor += 1
-
-    if skor == 150 and level == 4:
-        kazanma_ses.play()
-        if A == 4:
-            yem_koordinat.topleft = (0,0)
-            pencere.blit(yem, yem_koordinat)
-            pencere.blit(oyun_bitti_goruntusu,(0,0))
 
     pygame.display.update()
     saat.tick(FPS)
